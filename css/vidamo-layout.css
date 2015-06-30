@@ -1,0 +1,180 @@
+﻿/***************************************************************
+
+CSS For index.html
+
+***************************************************************/
+
+@media (min-width: 768px) {
+    .nav-tabs.nav-justified > li > a{
+        padding: 5px;
+    }
+}
+
+/**************************
+ menu bar
+ **************************/
+
+.dropdown{
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+/**************************
+ left pane graph area
+ **************************/
+
+
+
+.graph-area .znpController{
+   width:100%;
+   height:95%;
+   position:relative;
+}
+
+.graph-area .panzoom{
+    width:100%;
+    height:1100px;
+}
+
+.graph-area .flow-chart{
+    position: relative;
+    width:4000px;
+    height: 4000px
+}
+
+.graph-area .buttons{
+    position: absolute;
+    bottom: 10px;
+    margin-left: 2px;
+}
+
+/**************************
+ middle pane 3D area
+ **************************/
+
+.view-area #3dviewport {
+    position:relative;
+    width:100%;
+    height: 100%;
+    /*overflow: hidden;*/
+}
+
+
+.view-area .tabArea{
+    position: relative;
+    left: 9px;
+    height: 100%;
+    width: 100%;
+}
+
+.view-area .codeEditor {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    height:100%;
+    width:100%;
+    opacity: 0.8;
+}
+
+.view-area .console{
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    margin-left: 2px;
+    width: 98%;
+}
+
+
+.view-area  .well-lg {
+    height: 250px;
+    width: 100%;
+    overflow: auto;
+    margin-top: 1px;
+    padding: 6px;
+    border-radius: 2px;
+}
+
+/*************************
+right pane code area
+*************************/
+
+.code-area .nodeName{
+    padding: 6px;
+    margin: 0;
+    position: relative;
+    left: 9px;
+}
+
+/* todo how come it is 40 while graph one is 10*/
+.code-area .buttons{
+    position: fixed;
+    bottom: 10px;
+    margin-left: 2px;
+}
+
+.code-area .codeEditor {
+    position: absolute;
+    height:100%;
+    width:98%;
+    /*overflow: auto;*/
+}
+
+/* todo when overflow the buttons will be floating*/
+.code-area .tabArea{
+    position: relative;
+    left: 9px;
+    width: 100%;
+    height: 92%;
+    overflow: auto;
+}
+
+/* should clarify this*/
+.code-area .panelHack {
+    /*margin-bottom: -20px;*/
+}
+
+/* hack for ui-tree procedure tree structure*/
+.angular-ui-tree-handle {
+    background: #f8faff;
+    border: 0px solid #dae2ea;
+    color: #7c9eb2;
+    padding: 0px 0px;
+}
+
+.angular-ui-tree-handle:hover {
+    color: #438eb9;
+    background: #f4f6f7;
+    border-color: #dce2e8;
+}
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    box-sizing: border-box;
+}
+
+.group-title {
+    background-color: #687074 !important;
+    color: #FFF !important;
+}
+
+/* black thin frame for pan-zoom area [left pane graph area] */
+.pan-zoom-frame {
+    border: 1px solid #aaaaaa;
+}
+
+.panel-default > .panel-heading {
+    padding: 5px;
+}
+
+.input-group-addon {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+}
+
+.panel-group {
+    margin-top: 4px;
+    margin-bottom: 4px !important;
+}
