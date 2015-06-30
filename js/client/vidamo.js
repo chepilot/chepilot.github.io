@@ -799,11 +799,14 @@ vidamo.controller('graphCtrl', function($scope,prompt) {
 // zoom and pan controller
 vidamo.controller('znpController', ['$scope',
     function($scope) {
-        var rect = { x : 2000, y: 2400, width: 500 , height:500};
+        var rect = { x : 2000, y: 2000, width: 500 , height:500};
         // Instantiate models which will be passed to <panzoom> and <panzoomwidget>
         // The panzoom config model can be used to override default configuration values
 
         $scope.panzoomConfig = {
+            zoomLevels: 12,
+            neutralZoomLevel: 5,
+            scalePerZoomLevel: 1.5,
             initialZoomToFit: rect
         };
 
