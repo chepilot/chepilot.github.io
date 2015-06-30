@@ -35,7 +35,7 @@ CSS For index.html
 }
 
 .graph-area .flow-chart{
-    position: relative;
+    position: absolute;
     width:4000px;
     height: 4000px
     /*width:100%;*/

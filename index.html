@@ -3,19 +3,18 @@
 
 <head>
   <meta charset="utf-8" />
-    <!--<meta name="viewport" content="width=device-width">-->
   <title>Vidamo</title>
 
-  <!-- stylesheet -->
-  <link rel="stylesheet" href="css/vidamo-layout.css">
-  <link rel="stylesheet" href="css/ui-layout.css">
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="css/select2.css">
-  <link rel="stylesheet" href="css/ui-tree.css">
-  <link rel="stylesheet" href="css/graph.css">
-  <link rel="stylesheet" href="css/panzoomwidget.css">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="css/vidamo-layout.css">
+    <link rel="stylesheet" href="css/ui-layout.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/select2.css">
+    <link rel="stylesheet" href="css/ui-tree.css">
+    <link rel="stylesheet" href="css/graph.css">
+    <link rel="stylesheet" href="css/panzoomwidget.css">
 
-  <!--three.js-->
+    <!--three.js-->
     <link id="theme" href="css/light.css" rel="stylesheet" />
     <link href="js/threejs/editor/css/types.css" rel="stylesheet">
 
@@ -59,8 +58,6 @@
     <script src="js/threejs/editor/js/Config.js"></script>
     <script src="js/threejs/editor/js/Loader.js"></script>
     <script src="js/threejs/editor/js/Viewport.js"></script>
-
-    <script src="js/threejs/add.js"></script>
 
     <script src="js/threejs/add.js"></script>
 
@@ -610,110 +607,37 @@
             </div>
     </div>
 
-        <script>
-            var editor = new Editor();
+     <!--jquery-->
+     <script type="text/javascript" src="js/jquery/jquery-1.11.1.js"></script>
+     <!--angular modules -->
+     <script type="application/javascript" src="js/angular/angular.min.js"></script>
+     <script type="text/javascript" src="js/angular/angular-sanitize.js"></script>
+     <!--angular-ui packages-->
+     <script type="text/javascript" src="js/angular-ui/ui-ace/ui-ace.js"></script>
+     <script type="application/javascript" src="js/angular-ui/ui-layout/ui-layout.js"></script>
+     <script src="js/angular-ui/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+     <script type="text/javascript" src="js/angular-ui/ui-tree/angular-ui-tree.js"></script>
+     <!--supporting packages-->
+     <script type="text/javascript" src="js/packages/select2-3.5.0/select2.js"></script>
+     <script type="text/javascript" src="js/packages/ace-builds/src-min-noconflict/ace.js"></script>
+     <!--flowchart system-->
+     <script src="js/angular-ui/ui-flowchart/debug.js" type="text/javascript"></script>
+     <script src="js/angular-ui/ui-flowchart/svg_class.js" type="text/javascript"></script>
+     <script src="js/angular-ui/ui-flowchart/mouse_capture_service.js" type="text/javascript"></script>
+     <script src="js/angular-ui/ui-flowchart/dragging_service.js" type="text/javascript"></script>
+     <script src="js/angular-ui/ui-flowchart/flowchart_viewmodel.js" type="text/javascript"></script>
+     <script src="js/angular-ui/ui-flowchart/flowchart_directive.js" type="text/javascript"></script>
+      <!-- zoom and pan-->
+     <script src="js/packages/hamsterjs/hamster.js"></script>
+     <script src="js/angular/angular-mousewheel/mousewheel.js"></script>
+     <script src="js/angular-ui/ui-panzoom/panzoom.js"></script>
 
-            var viewport = new Viewport(editor).setId('viewport');
-            document.getElementById("3dviewport").appendChild(viewport.dom);
-
-            editor.setTheme( editor.config.getKey( 'theme' ) );
-
-            editor.storage.init( function () {
-
-                editor.storage.get( function ( state ) {
-
-                    if ( state !== undefined ) {
-                        var loader = new THREE.ObjectLoader();
-                        var scene = loader.parse( state );
-                        editor.setScene( scene );
-                    }
-
-                    var selected = editor.config.getKey( 'selected' );
-
-                    if ( selected !== undefined ) {
-                        editor.selectByUuid( selected );
-                    }
-                } );
-
-
-                var timeout;
-                var exporter = new THREE.ObjectExporter();
-                var saveState = function ( scene ) {
-                    clearTimeout( timeout );
-                    timeout = setTimeout( function () {
-                        editor.storage.set( exporter.parse( editor.scene ) );
-                    }, 1000 );
-
-                };
-
-                var signals = editor.signals;
-
-                signals.objectAdded.add( saveState );
-                signals.objectChanged.add( saveState );
-                signals.objectRemoved.add( saveState );
-                signals.materialChanged.add( saveState );
-                signals.sceneGraphChanged.add( saveState );
-            } );
-
-            document.addEventListener( 'dragover', function ( event ) {
-                event.preventDefault();
-                event.dataTransfer.dropEffect = 'copy';
-            }, false );
-
-            document.addEventListener( 'drop', function ( event ) {
-                event.preventDefault();
-                editor.loader.loadFile( event.dataTransfer.files[ 0 ] );
-            }, false );
-
-            document.addEventListener( 'keydown', function ( event ) {
-                switch ( event.keyCode ) {
-                    case 8: // prevent browser back
-                        event.preventDefault();
-                        break;
-                    case 46: // delete
-                        var parent = editor.selected.parent;
-                        editor.removeObject( editor.selected );
-                        editor.select( parent );
-                        break;
-                }
-            }, false );
-
-            var onWindowResize = function ( event ) {
-                editor.signals.windowResize.dispatch();
-            };
-            window.addEventListener( 'resize', onWindowResize, false );
-            onWindowResize();
-
-        </script>
-
-         <!--  javascript -->
-         <!--jquery-->
-         <script type="text/javascript" src="js/jquery/jquery-1.11.1.js"></script>
-         <!--angular modules -->
-         <script type="application/javascript" src="js/angular/angular.min.js"></script>
-         <script type="text/javascript" src="js/angular/angular-sanitize.js"></script>
-         <!--angular-ui packages-->
-         <script type="text/javascript" src="js/angular-ui/ui-ace/ui-ace.js"></script>
-         <script type="application/javascript" src="js/angular-ui/ui-layout/ui-layout.js"></script>
-         <script src="js/angular-ui/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
-         <script type="text/javascript" src="js/angular-ui/ui-tree/angular-ui-tree.js"></script>
-         <!--supporting packages-->
-         <script type="text/javascript" src="js/packages/select2-3.5.0/select2.js"></script>
-         <script type="text/javascript" src="js/packages/ace-builds/src-min-noconflict/ace.js"></script>
-         <!--flowchart system-->
-         <script src="js/angular-ui/ui-flowchart/debug.js" type="text/javascript"></script>
-         <script src="js/angular-ui/ui-flowchart/svg_class.js" type="text/javascript"></script>
-         <script src="js/angular-ui/ui-flowchart/mouse_capture_service.js" type="text/javascript"></script>
-         <script src="js/angular-ui/ui-flowchart/dragging_service.js" type="text/javascript"></script>
-         <script src="js/angular-ui/ui-flowchart/flowchart_viewmodel.js" type="text/javascript"></script>
-         <script src="js/angular-ui/ui-flowchart/flowchart_directive.js" type="text/javascript"></script>
-          <!-- zoom and pan-->
-         <script src="js/packages/hamsterjs/hamster.js"></script>
-         <script src="js/angular/angular-mousewheel/mousewheel.js"></script>
-         <script src="js/angular-ui/ui-panzoom/panzoom.min.js"></script>
-         <!--vidamo angular app-->
-         <script src="js/client/vidamo.js"></script>
-        <script src="js/client/module.js"></script>
+     <!--vidamo angular app-->
+     <script src="js/vidamo/vidamo.js"></script>
+     <script src="js/vidamo/graph.js"></script>
+     <script src="js/vidamo/panzoom.js"></script>
+     <script src="js/vidamo/module.js"></script>
+     <script src="js/vidamo/viewport.js"></script>
 
 </body>
 
