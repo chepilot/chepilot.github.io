@@ -87,16 +87,20 @@
                           <a href="" ng-click="importProcedureJson()">Import Procedure</a>
                       </li>
 
-                      <li id = "jsonurl">
+                      <li id = "graphJson">
                           <a ng-href="{{graphUrl}}" download="graph.json" ng-click = "exportGraphJson()"> Export Graph </a>
                       </li>
 
-                      <li id = "jsonurl1">
+                      <li id = "procedureJson">
                           <a ng-href="{{procedureUrl}}" download="procedure.json" ng-click = "exportProcedureJson()"> Export Procedure </a>
                       </li>
 
-                      <li id = "jsonurl2">
+                      <li id = "downloadJs">
                           <a ng-href="{{jsUrl}}" download="project.js" ng-click = "downloadJs()"> download JS file </a>
+                      </li>
+
+                      <li id = "downloadLib">
+                          <a ng-href="{{libUrl}}" download="vidamo.js" ng-click = "downloadLib()"> download Lib file </a>
                       </li>
 
                   </ul>
@@ -214,7 +218,7 @@
                             <svg width="32" height="32"
                                  style="position: absolute;
                                         top: 3px;
-                                        right: 1px;
+                                        right: 20px;
                                         cursor: pointer;">
 
                                 <path d="M 12,12 L 22,22 M 22,12 12,22"
@@ -284,7 +288,8 @@
                                                                 <div ng-if="node.dataType == 'var'">
                                                                     <div class="input-group input-group-sm">
                                                                         <span class="input-group-addon">var name</span>
-                                                                        <input class="form-control"
+                                                                        <input  type="text"
+                                                                                class="form-control"
                                                                                name="dataName"
                                                                                placeholder="{{node.dataName}}"
                                                                                ng-model="dataName"
@@ -468,11 +473,11 @@
                                                                                 selected disabled>
                                                                             {{node.parameters[1]}}
                                                                         </option>
-                                                                        <option ng-repeat="node in data"
+                                                                        <option ng-repeat="node in flattenData"
                                                                                 value="{{node.dataName}}">
                                                                             {{node.dataName}}
                                                                         </option>
-                                                                        <option ng-repeat="node in data"
+                                                                        <option ng-repeat="node in flattenData"
                                                                                 value="{{node.forItemName}}">
                                                                             {{node.forItemName}}
                                                                         </option>

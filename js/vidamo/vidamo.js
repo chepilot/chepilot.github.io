@@ -20,3 +20,4 @@ vidamo.config( [
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob|data):/);
     }
 ]);
+
