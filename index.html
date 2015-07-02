@@ -122,8 +122,13 @@
                   <a href class="dropdown-toggle">  Setting |</a>
                 </span>
 
-                <span class="dropdown" on-toggle="toggled(open)" >
-                  <a href class="dropdown-toggle">  Help |</a>
+                <span class="dropdown" on-toggle="toggled(open)">
+                  <a href class="dropdown-toggle">  Help </a>
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="https://github.com/chepilot/chepilot.github.io" target="_blank"> Github Repo </a>
+                      </li>
+                  </ul>
                 </span>
             </div>
 
@@ -239,15 +244,17 @@
                         <pre class="nodeName">{{currentNodeName}}</pre>
                     </div>
 
-                    <tabset justified="true" class="tabArea">
-                        <tab heading="Procedure" >
-                            <div>
+                    <tabset justified="true" >
+                        <tab heading="Procedure" style="height:100%">
+                            <div class="tabArea">
                                     <script type="text/ng-template" id="nodes_renderer_procedure.html">
                                         <div ui-tree-handle class="tree-node tree-node-content">
                                             <accordion>
-                                                    <accordion-group is-open="true">
+                                                    <accordion-group ng-init="status = {isOpen: true}" is-open="status.isOpen">
+
                                                         <accordion-heading>
-                                                            <a ng-if="node.nodes && node.nodes.length > 0
+                                                        <div>
+                                                            <span ng-if="node.nodes && node.nodes.length > 0
                                                             || node.nodes && node.nodes.length == 0"
                                                                data-nodrag ng-click="toggle(this)">
                                                                   <i class="glyphicon"
@@ -255,13 +262,16 @@
                                                                                 "{'glyphicon-chevron-right': collapsed,
                                                                                  'glyphicon-chevron-down': !collapsed}">
                                                                   </i>
-                                                            </a>
-                                                            {{node.title}}
-                                                            <a class="pull-right btn btn-xs"
+                                                            </span>
+
+                                                             <span class="tree-node tree-node-content" style="width: 100%;" >{{node.title}}</span>
+
+                                                            <span class="pull-right btn btn-xs"
                                                                data-nodrag ng-click="remove(this)">
                                                                 <span class="glyphicon glyphicon-remove">
                                                                 </span>
-                                                            </a>
+                                                            </span>
+                                                        </div>
                                                         </accordion-heading>
 
                                                         <div ui-tree-nodes=""
@@ -495,7 +505,7 @@
                                                             </div>
                                                         </div>
                                                     </accordion-group>
-                                                </div>
+                                            </div>
                                             </accordion>
                                     </script>
 
@@ -523,6 +533,7 @@
 
                         <!--add to interface -->
                         <tab heading="Interface">
+                            <div class="tabArea">
                                 <script type="text/ng-template" id="nodes_renderer_interface.html">
                                     <div ui-tree-handle class="tree-node tree-node-content">
                                         <accordion>
@@ -595,6 +606,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
                             <div class="buttons">
                                 <button class="btn btn-default btn-xs" ng-click="newInterface('Data')">Add Data</button>
@@ -617,17 +629,20 @@
 
      <!--jquery-->
      <script type="text/javascript" src="js/jquery/jquery-1.11.1.js"></script>
+
      <!--angular modules -->
      <script type="application/javascript" src="js/angular/angular.min.js"></script>
      <script type="text/javascript" src="js/angular/angular-sanitize.js"></script>
+
      <!--angular-ui packages-->
      <script type="text/javascript" src="js/angular-ui/ui-ace/ui-ace.js"></script>
      <script type="application/javascript" src="js/angular-ui/ui-layout/ui-layout.js"></script>
      <script src="js/angular-ui/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
      <script type="text/javascript" src="js/angular-ui/ui-tree/angular-ui-tree.js"></script>
+
      <!--supporting packages-->
-     <script type="text/javascript" src="js/packages/select2-3.5.0/select2.js"></script>
      <script type="text/javascript" src="js/packages/ace-builds/src-min-noconflict/ace.js"></script>
+
      <!--flowchart system-->
      <script src="js/angular-ui/ui-flowchart/debug.js" type="text/javascript"></script>
      <script src="js/angular-ui/ui-flowchart/svg_class.js" type="text/javascript"></script>
@@ -635,6 +650,7 @@
      <script src="js/angular-ui/ui-flowchart/dragging_service.js" type="text/javascript"></script>
      <script src="js/angular-ui/ui-flowchart/flowchart_viewmodel.js" type="text/javascript"></script>
      <script src="js/angular-ui/ui-flowchart/flowchart_directive.js" type="text/javascript"></script>
+
       <!-- zoom and pan-->
      <script src="js/packages/hamsterjs/hamster.js"></script>
      <script src="js/angular/angular-mousewheel/mousewheel.js"></script>

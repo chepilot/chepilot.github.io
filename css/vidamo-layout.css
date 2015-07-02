@@ -107,29 +107,29 @@ right pane code area
     left: 9px;
 }
 
-
 .code-area .buttons{
     position: fixed;
     bottom: 10px;
-    margin-left: 2px;
+    margin-left: 9px;
 }
 
 .code-area .codeEditor {
     position: absolute;
     height:100%;
     width:98%;
-    /*overflow: auto;*/
-}
-
-/* todo when overflow the buttons will be floating*/
-.code-area .tabArea{
-    position: relative;
-    left: 9px;
-    width: 100%;
-    height: 92%;
     overflow: auto;
 }
 
+
+
+/* todo when overflow the buttons will be floating*/
+.code-area .tabArea{
+    position: absolute;
+    left: 9px;
+    width: 100%;
+    height: 88%;
+    overflow: auto;
+}
 
 /* hack for ui-tree procedure tree structure*/
 .angular-ui-tree-handle {
@@ -166,8 +166,10 @@ right pane code area
 }
 
 .panel-group {
-    margin-top: 4px;
-    margin-bottom: 4px !important;
+    margin-top: 1px;
+    margin-bottom: 0px !important;
+    padding-left: 8px;
+    padding-right: 6px;
 }
 
 .input-group-sm > .input-group-addon {
@@ -175,10 +177,11 @@ right pane code area
     font-size: 12px !important;
     height: 22px !important;
     line-height: 1 !important;
+    background-color: #ffffff;
 }
 
 .input-group-sm >.form-control{
-    padding: 5px 10px !important;
+    padding: 2px 6px !important;
     font-size: 12px !important;
     height: 24px !important;
     line-height: 1 !important;
