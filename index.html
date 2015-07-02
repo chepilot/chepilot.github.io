@@ -242,7 +242,6 @@
                     <tabset justified="true" class="tabArea">
                         <tab heading="Procedure" >
                             <div>
-                                <div>
                                     <script type="text/ng-template" id="nodes_renderer_procedure.html">
                                         <div ui-tree-handle class="tree-node tree-node-content">
                                             <accordion>
@@ -369,10 +368,11 @@
                                                                                     selected disabled>
                                                                                 {{node.forList}}
                                                                             </option>
-                                                                            <option ng-repeat="node in data"
-                                                                                    value="{{node.dataName}}">
-                                                                                {{node.dataName}}
-                                                                            </option>
+                                                                                    <option ng-repeat="node in flattenData"
+                                                                                            ng-if="node.dataName"
+                                                                                            value="{{node.dataName}}">
+                                                                                            {{node.dataName}}
+                                                                                    </option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -409,6 +409,7 @@
                                                                         </option>
                                                                         <option  ng-repeat=
                                                                                  "outputPort in node.parentNode.outputConnectors"
+                                                                                 ng-if="outputPort.name"
                                                                                  value="{{outputPort.name}}">
                                                                             {{outputPort.name}}
                                                                         </option>
@@ -424,7 +425,8 @@
                                                                                 selected disabled>
                                                                             {{node.parameters[2]}}
                                                                         </option>
-                                                                        <option ng-repeat="node in data"
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
                                                                                 value="{{node.dataName}}">
                                                                             {{node.dataName}}
                                                                         </option>
@@ -444,6 +446,7 @@
                                                                             {{node.parameters[0]}}
                                                                         </option>
                                                                         <option  ng-repeat="inputPort in node.parentNode.inputConnectors"
+                                                                                 ng-if="inputPort.name"
                                                                                  value="{{inputPort.name}}">
                                                                             {{inputPort.name}}
                                                                         </option>
@@ -474,10 +477,12 @@
                                                                             {{node.parameters[1]}}
                                                                         </option>
                                                                         <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
                                                                                 value="{{node.dataName}}">
                                                                             {{node.dataName}}
                                                                         </option>
                                                                         <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
                                                                                 value="{{node.forItemName}}">
                                                                             {{node.forItemName}}
                                                                         </option>
@@ -500,8 +505,6 @@
                                                  ui-tree-node ng-include="'nodes_renderer_procedure.html'">
                                             </div>
                                         </div>
-                                    </div>
-
                                     </div>
                                 </div>
 

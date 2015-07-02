@@ -314,22 +314,16 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     // ------------------------------------- PROCEDURE GRAPH -------------------------------------
     //
 
-    // object to flatten data tree for item searching
-
-
     // watch change of procedure data tree, if change update the flattenData
     $scope.$watch('data', function(){
 
         // flatten the procedure three for data searching
-
-        console.log('flattening!');
 
         var i, l,
             nodes=[],
             visited=[];
 
         function clone(n) {
-            console.log(n['title'] );
             if(n['title'] == 'Data'){
                 var props=['id','title','dataName','dataValue','parentNode']
             }
@@ -362,12 +356,13 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 }
             }
         }
-
-        for (i = 0, l = $scope.data.length; i < l; i++) {
-            helper($scope.data[i]);
+        if($scope.data){
+            for (i = 0, l = $scope.data.length; i < l; i++) {
+                helper($scope.data[i]);
+            }
         }
 
-        console.log(nodes);
+        // object of flatten procedure data tree
         $scope.flattenData = nodes;
     }, true);
 
