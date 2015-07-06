@@ -64,8 +64,7 @@
 </head>
 
 <body>
-        <div  ng-controller="graphCtrl">
-
+        <div ng-controller="graphCtrl">
             <!--dropdown Menu-->
             <div class = "menubar">
                 <span class="dropdown" on-toggle="toggled(open)">
@@ -78,52 +77,55 @@
                       <li>
                           <input type="file" id="importGraphJson" name="importGraphJson[]"
                                  style="visibility: hidden; width: 1px; height: 1px" multiple />
-                          <a href="" ng-click="importGraphJson()">Import Graph</a>
+                          <a href="" ng-click="importGraphJson()">Open Graph</a>
                       </li>
 
                       <li>
                           <input type="file" id="importProcedureJson" name="importProcedureJson[]"
                                  style="visibility: hidden; width: 1px; height: 1px" multiple />
-                          <a href="" ng-click="importProcedureJson()">Import Procedure</a>
+                          <a href="" ng-click="importProcedureJson()">Open Procedure</a>
                       </li>
 
                       <li id = "graphJson">
-                          <a ng-href="{{graphUrl}}" download="graph.json" ng-click = "exportGraphJson()"> Export Graph </a>
+                          <a ng-href="{{graphUrl}}" download="graph.json" ng-click = "exportGraphJson()"> Save Graph </a>
                       </li>
 
                       <li id = "procedureJson">
-                          <a ng-href="{{procedureUrl}}" download="procedure.json" ng-click = "exportProcedureJson()"> Export Procedure </a>
+                          <a ng-href="{{procedureUrl}}" download="procedure.json" ng-click = "exportProcedureJson()"> Save Procedure </a>
                       </li>
-
-                      <li id = "downloadJs">
-                          <a ng-href="{{jsUrl}}" download="project.js" ng-click = "downloadJs()"> download JS file </a>
-                      </li>
-
-                      <li id = "downloadLib">
-                          <a ng-href="{{libUrl}}" download="vidamo.js" ng-click = "downloadLib()"> download Lib file </a>
-                      </li>
-
                   </ul>
                 </span>
 
+
                 <span class="dropdown" on-toggle="toggled(open)" >
-                  <a href class="dropdown-toggle">  Edit |</a>
+                      <a href class="dropdown-toggle">  Node |</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a> Import Node </a>
+                          </li>
+
+                          <li>
+                              <a> Export Node </a>
+                          </li>
+                      </ul>
+
                 </span>
 
                 <span class="dropdown" on-toggle="toggled(open)" >
-                  <a href class="dropdown-toggle">  View |</a>
-                </span>
+                    <a href class="dropdown-toggle">  Code |</a>
+                    <ul class="dropdown-menu">
+                        <li id = "downloadJs">
+                            <a ng-href="{{jsUrl}}" download="project.js" ng-click = "downloadJs()"> Export Graph&Nodes </a>
+                        </li>
 
-                <span class="dropdown" on-toggle="toggled(open)" >
-                  <a href class="dropdown-toggle">  Libraries |</a>
-                </span>
-
-                <span class="dropdown" on-toggle="toggled(open)" >
-                  <a href class="dropdown-toggle">  Setting |</a>
+                        <li id = "downloadLib">
+                            <a ng-href="{{libUrl}}" download="vidamo.js" ng-click = "downloadLib()"> Export Function Library </a>
+                        </li>
+                    </ul>
                 </span>
 
                 <span class="dropdown" on-toggle="toggled(open)">
-                  <a href class="dropdown-toggle">  Help </a>
+                  <a href class="dropdown-toggle">  About </a>
                   <ul class="dropdown-menu">
                       <li>
                           <a href="https://github.com/chepilot/chepilot.github.io" target="_blank"> Github Repo </a>
@@ -134,7 +136,7 @@
 
             <!--resizable layout-->
             <div ui-layout>
-                <div ui-layout="{flow : 'column'}" >
+                <div class="layout-area" ui-layout="{flow : 'column'}">
                     <!--graph area-->
                     <div class=" graph-area">
                         <div
