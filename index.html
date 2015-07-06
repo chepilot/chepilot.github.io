@@ -251,21 +251,23 @@
                                     <script type="text/ng-template" id="nodes_renderer_procedure.html">
                                         <div ui-tree-handle class="tree-node tree-node-content">
                                             <accordion>
-                                                    <accordion-group ng-init="status = {isOpen: true}" is-open="status.isOpen">
+                                                    <accordion-group ng-init="status = {open: true}" is-open="status.open">
 
                                                         <accordion-heading>
                                                         <div>
                                                             <span ng-if="node.nodes && node.nodes.length > 0
                                                             || node.nodes && node.nodes.length == 0"
-                                                               data-nodrag ng-click="toggle(this)">
+                                                               data-nodrag>
                                                                   <i class="glyphicon"
                                                                         ng-class=
-                                                                                "{'glyphicon-chevron-right': collapsed,
-                                                                                 'glyphicon-chevron-down': !collapsed}">
+                                                                                "{'glyphicon-chevron-right': !status.open,
+                                                                                 'glyphicon-chevron-down': status.open}">
                                                                   </i>
                                                             </span>
 
-                                                             <span class="tree-node tree-node-content" style="width: 100%;" >{{node.title}}</span>
+                                                        <span style="width: 100%;color: black;">
+                                                                {{node.title}}
+                                                        </span>
 
                                                             <span class="pull-right btn btn-xs"
                                                                data-nodrag ng-click="remove(this)">
@@ -274,6 +276,12 @@
                                                             </span>
                                                         </div>
                                                         </accordion-heading>
+
+
+
+
+
+
 
                                                         <div ui-tree-nodes=""
                                                              ng-model="node.nodes"

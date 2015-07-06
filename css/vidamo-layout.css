@@ -138,7 +138,7 @@ right pane code area
     padding: 6px;
     margin: 0;
     position: relative;
-    left: 9px;
+    border-radius: 3px;
 }
 
 .code-area .buttons{
@@ -159,7 +159,7 @@ right pane code area
 /* todo when overflow the buttons will be floating*/
 .code-area .tabArea{
     position: absolute;
-    left: 9px;
+    right: 0;
     width: 100%;
     height: 88%;
     overflow: auto;
@@ -167,14 +167,14 @@ right pane code area
 
 /* hack for ui-tree procedure tree structure*/
 .angular-ui-tree-handle {
-    background: #f8faff;
-    border: 0px solid #dae2ea;
-    color: #7c9eb2;
+    background: #ffffff;
+    border: 0px solid #ffffff;
+    color: #ffffff;
     padding: 0px 0px;
 }
 
 .angular-ui-tree-handle:hover {
-    color: #438eb9;
+    color: #ffffff;
     background: #f4f6f7;
     border-color: #dce2e8;
 }
@@ -190,22 +190,26 @@ right pane code area
     color: #FFF !important;
 }
 
-/* black thin frame for pan-zoom area [left pane graph area] */
 
 .panel-default > .panel-heading {
-    padding: 5px;
+    padding: 6px;
+}
+
+.panel-title{
+    font-size: 13px !important;
 }
 
 .panel-group {
     margin-top: 1px;
     margin-bottom: 0px !important;
-    padding-left: 8px;
-    padding-right: 2px;
+    padding-left: 10px;
+    padding-right: 1px;
 }
 
 .panel{
-    border-bottom-width: 2px !important;
-    border-left-width: 2px !important;
+    /*border-top: 2px solid #aaaaaa !important;*/
+    /*border-bottom-width: 2px !important;*/
+    border-left: 2px solid #aaaaaa !important;
 }
 
 .input-group-sm > .input-group-addon {
