@@ -17,6 +17,7 @@ CSS For index.html
 .dropdown{
     padding-left: 10px;
     padding-top: 3px;
+    z-index: 100000;
 }
 
 /**************************

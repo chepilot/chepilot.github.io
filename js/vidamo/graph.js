@@ -44,8 +44,6 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
 
     // open and read json file for graph
-    // todo json file content validation
-    // todo warning: import without procedure is incomplete
     // todo asychronization error need to fix
 
     $scope.importGraphJson = function(){
@@ -57,19 +55,24 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             var files = evt.target.files;
             var f = files[0];
 
-            // todo file type match to json
             var reader = new FileReader();
 
-            reader.onload = (function (theFile) {
+            reader.onload = (function () {
                 return function (e) {
-                    graphJsonObj = JSON.parse(e.target.result);
+                    if(f.name.split('.').pop() == 'json'){
+                        graphJsonObj = JSON.parse(e.target.result);
+                        // update the chart data and view model
+                        chartDataModel = graphJsonObj;
+                        $scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
 
-                    console.log('reader onloading');
+                        document.getElementById('log').innerHTML += "<div style='color: green'>Graph imported!</div>";
 
-                    // update the chart data and view model
-
-                    chartDataModel = graphJsonObj;
-                    $scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+                        if($scope.dataList.length == 0){
+                            document.getElementById('log').innerHTML += "<div style='color: green'>Please import procedure too.</div>";
+                        }
+                    }else{
+                        document.getElementById('log').innerHTML += "<div style='color: red'>Error: File type is not Json!</div>";
+                    }
                 };
             })(f);
 
@@ -77,11 +80,10 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         }
 
         document.getElementById('importGraphJson').addEventListener('change', handleFileSelect, false);
-    }
+    };
 
 
     // open and read json file for procedure
-    // todo json file content validation
     // todo regenerate graph from procedure json import?
     // todo synchronization error need to fix
 
@@ -95,30 +97,32 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             var files = evt.target.files;
             var f = files[0];
 
-            // todo file type match to json
-            var reader = new FileReader();
+                var reader = new FileReader();
 
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    procedureJsonObj = JSON.parse(e.target.result);
+                reader.onload = (function () {
+                    return function (e) {
+                        if(f.name.split('.').pop() == 'json') {
+                            procedureJsonObj = JSON.parse(e.target.result);
 
-                    // update the procedure dataList
-                    $scope.dataList = procedureJsonObj;
-                };
-            })(f);
+                            // update the procedure dataList
+                            $scope.dataList = procedureJsonObj;
+                            document.getElementById('log').innerHTML += "<div style='color: green'>Procedure imported!</div>";
 
-            reader.readAsText(f);
+                            if(chartDataModel.nodes.length == 0){
+                                document.getElementById('log').innerHTML += "<div style='color: green'>Please import graph too.</div>";
+                            }
+                        }else{
+                            document.getElementById('log').innerHTML += "<div style='color: red'>Error: File type is not Json!</div>";
+                        }
+                    };
+                })(f);
+
+                reader.readAsText(f);
         }
 
         document.getElementById('importProcedureJson').addEventListener('change', handleFileSelect, false);
+    };
 
-        console.log($scope.dataList)
-    }
-
-    // fixme what the hell is this?
-    $scope.updateProcedure = function(){
-
-    }
 
     // save json file for graph
 
@@ -220,7 +224,6 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         }
 
         // Template for a new node
-        // todo initial location of new node
 
         var newNodeDataModel = {
             name: nodeName,
@@ -756,7 +759,14 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
         document.getElementById('log').innerHTML += "<div> Code generation is done.</div>";
         document.getElementById('log').innerHTML += "<div></br> Execute generated code</div>";
-        eval($scope.javascriptCode);
+
+        try{
+            eval($scope.javascriptCode);
+        }catch (e) {
+            document.getElementById('log').innerHTML +=     "<div style='color:red'>" +  e.message + "</div>";
+            alert(e.stack);
+        }
+
         document.getElementById('log').innerHTML += "<div> Execution done</div>";
     };
 

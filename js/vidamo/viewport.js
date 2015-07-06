@@ -58,7 +58,6 @@ document.addEventListener( 'drop', function ( event ) {
 
 document.addEventListener( 'keydown', function ( event ) {
     switch ( event.keyCode ) {
-        // fixme this prevent all delete key disabled
         //case 8: // prevent browser back
         //    event.preventDefault();
         //    break;
