@@ -217,7 +217,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
         // promote for name of new node
 
-        var nodeName = prompt("Enter a node name:", "New node");
+        var nodeName = prompt("Enter a node name:", "NewNode");
 
         if (!isValidName(nodeName)) {
             return;
