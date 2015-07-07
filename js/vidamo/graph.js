@@ -3,9 +3,12 @@
 //
 
 vidamo.controller('graphCtrl', function($scope,prompt,$http) {
+    // initialize content for javascript Code
+    $scope.javascriptCode = '//\n' + '// To generate code, create nodes & procedures and run!\n' + '//\n';
 
     // data structure of procedure list
     $scope.dataList = [];
+
     // procedure code data structure of procedure list
     $scope.codeList = [];
 
@@ -185,11 +188,6 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
          $scope.data  = $scope.dataList[$scope.nodeIndex];
 
-         // update the code tab
-
-         $scope.code = $scope.codeList[$scope.nodeIndex];
-         $scope.functionCode = $scope.code;
-
          // update the interface tab
 
          $scope.interface = $scope.interfaceList[$scope.nodeIndex];
@@ -242,7 +240,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
         // when new node added, add new code block
 
-        $scope.codeList.push('');
+        $scope.codeList.push('//\n' + '// To generate code, create nodes & procedures and run!\n' + '//\n');
 
         // when new node added, increase the number of interface list by one
 
@@ -567,7 +565,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         // function definitions
         //
 
-        $scope.javascriptCode ='// Function definitions:' + '\n';
+        $scope.javascriptCode ='// Function definitions:' + '\n\n';
 
         // use flag to check whether it is the first argument
 
@@ -578,7 +576,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             $scope.javascriptCode += 'function ' + $scope.chartViewModel.nodes[i].data.name +' (';
 
             $scope.codeList[i]='// Function definitions:' + '\n' + '// This is definition for function '
-                                + $scope.chartViewModel.nodes[i].data.name + '\n'
+                                + $scope.chartViewModel.nodes[i].data.name + '\n\n'
             $scope.codeList[i] = $scope.codeList[i] + 'function ' + $scope.chartViewModel.nodes[i].data.name +' (';
 
             // function arguments
@@ -699,7 +697,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         // execution based topological sort
         //
 
-        $scope.javascriptCode += '// execution \n';
+        $scope.javascriptCode += '// execution: \n';
 
         for(var n = 0; n < sortedOrder.length; n++) {
 

@@ -50,6 +50,8 @@
   display: none;
 }
 
+
+/*hide loading elements*/
 body > :not(.pace),body:before,body:after {
     -webkit-transition:opacity .4s ease-in-out;
     -moz-transition:opacity .4s ease-in-out;
