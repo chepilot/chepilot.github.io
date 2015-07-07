@@ -135,10 +135,13 @@ right pane code area
     margin-left: 8px;
 }
 .code-area .nodeName{
-    padding: 6px;
+    padding: 4px;
     margin: 0;
     position: relative;
     border-radius: 3px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
 }
 
 .code-area .buttons{
@@ -154,9 +157,6 @@ right pane code area
     overflow: auto;
 }
 
-
-
-/* todo when overflow the buttons will be floating*/
 .code-area .tabArea{
     position: absolute;
     right: 0;
@@ -207,8 +207,6 @@ right pane code area
 }
 
 .panel{
-    /*border-top: 2px solid #aaaaaa !important;*/
-    /*border-bottom-width: 2px !important;*/
     border-left: 2px solid #aaaaaa !important;
 }
 
