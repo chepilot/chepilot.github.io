@@ -29,13 +29,9 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     };
 
     // store json url
-    $scope.graphUrl = '';
-    $scope.procedureUrl = '';
+    $scope.sceneUrl= '';
     $scope.jsUrl = '';
     $scope.libUrl = '';
-
-    // procedure json
-    $scope.procedureJson = '';
 
     // check for the various File API support.
 
@@ -45,75 +41,44 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         alert('The File APIs are not fully supported in this browser.');
     }
 
+    // open and read json file for scene
 
-    // open and read json file for graph
-    // todo asychronization error need to fix
+    $scope.openSceneJson = function(){
 
-    $scope.importGraphJson = function(){
-        document.getElementById('importGraphJson').click();
-
-        graphJsonObj = null;
-
-        function handleFileSelect(evt) {
-            var files = evt.target.files;
-            var f = files[0];
-
-            var reader = new FileReader();
-
-            reader.onload = (function () {
-                return function (e) {
-                    if(f.name.split('.').pop() == 'json'){
-                        graphJsonObj = JSON.parse(e.target.result);
-                        // update the chart data and view model
-                        chartDataModel = graphJsonObj;
-                        $scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
-
-                        document.getElementById('log').innerHTML += "<div style='color: green'>Graph imported!</div>";
-
-                        if($scope.dataList.length == 0){
-                            document.getElementById('log').innerHTML += "<div style='color: green'>Please import procedure too.</div>";
-                        }
-                    }else{
-                        document.getElementById('log').innerHTML += "<div style='color: red'>Error: File type is not Json!</div>";
-                    }
-                };
-            })(f);
-
-            reader.readAsText(f);
-        }
-
-        document.getElementById('importGraphJson').addEventListener('change', handleFileSelect, false);
-    };
-
-
-    // open and read json file for procedure
-    // todo regenerate graph from procedure json import?
-    // todo synchronization error need to fix
-
-    $scope.importProcedureJson = function(){
-
-        document.getElementById('importProcedureJson').click();
+        document.getElementById('openSceneJson').click();
 
         procedureJsonObj = null;
 
         function handleFileSelect(evt) {
             var files = evt.target.files;
             var f = files[0];
+            var jsonString;
+            var graphJsonString;
+            var procedureJsonString;
+            var graphJsonObj;
+            var procedureJsonObj;
 
                 var reader = new FileReader();
 
                 reader.onload = (function () {
                     return function (e) {
                         if(f.name.split('.').pop() == 'json') {
-                            procedureJsonObj = JSON.parse(e.target.result);
+                            jsonString = e.target.result;
 
-                            // update the procedure dataList
-                            $scope.dataList = procedureJsonObj;
-                            document.getElementById('log').innerHTML += "<div style='color: green'>Procedure imported!</div>";
+                            graphJsonString = jsonString.split("//procedure json")[0];
+                            procedureJsonString = jsonString.split("//procedure json")[1];
 
-                            if(chartDataModel.nodes.length == 0){
-                                document.getElementById('log').innerHTML += "<div style='color: green'>Please import graph too.</div>";
-                            }
+                            graphJsonObj = JSON.parse(graphJsonString);
+                            procedureJsonObj = JSON.parse(procedureJsonString);
+
+                            // update the graph
+                            chartDataModel = graphJsonObj;
+                            $scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+
+                            // update the procedure
+                             $scope.dataList = procedureJsonObj;
+
+                            document.getElementById('log').innerHTML += "<div style='color: green'>Scene imported!</div>";
                         }else{
                             document.getElementById('log').innerHTML += "<div style='color: red'>Error: File type is not Json!</div>";
                         }
@@ -123,33 +88,23 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 reader.readAsText(f);
         }
 
-        document.getElementById('importProcedureJson').addEventListener('change', handleFileSelect, false);
+        document.getElementById('openSceneJson').addEventListener('change', handleFileSelect, false);
     };
 
 
-    // save json file for graph
+    // save json file for scene
 
-    $scope.exportGraphJson = function(){
+    $scope.saveSceneJson = function(){
+
         var graphJson = JSON.stringify($scope.chartViewModel.data, null, 4);
-
-        var graphBlob = new Blob([graphJson], {type: "application/json"});
-
-        $scope.graphUrl = URL.createObjectURL(graphBlob);
-    }
-
-    // save json file for procedure
-
-    $scope.exportProcedureJson = function(){
 
         var procedureJson = JSON.stringify($scope.dataList, null, 4);
 
-        //var fullJson = graphJson.concat('\n');
-        //var fullJson = fullJson.concat(procedureJson);
+        var sceneBlob = new Blob([graphJson + '\n\n' + '//procedure json\n' + procedureJson], {type: "application/json"});
 
-        var procedureBlob = new Blob([procedureJson], {type: "application/json"});
+        $scope.sceneUrl = URL.createObjectURL(sceneBlob);
+    };
 
-        $scope.procedureUrl = URL.createObjectURL(procedureBlob);
-    }
 
     // save js file
     $scope.downloadJs = function(){
@@ -157,7 +112,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         var jsBlob = new Blob([$scope.javascriptCode], {type: "application/javascript"});
 
         $scope.jsUrl = URL.createObjectURL(jsBlob);
-    }
+    };
 
     // save vidamo library file
     $scope.downloadLib = function(){
@@ -168,7 +123,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 $scope.libUrl = URL.createObjectURL(libBlob);
             }
         );
-    }
+    };
 
 
     //

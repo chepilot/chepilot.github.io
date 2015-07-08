@@ -153,6 +153,7 @@ right pane code area
 .code-area .codeEditor {
     position: absolute;
     height:100%;
+    bottom:0px;
     width:100%;
     overflow: auto;
 }

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/vidamo-layout.css">
     <link rel="stylesheet" href="css/ui-layout.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="css/select2.css">
     <link rel="stylesheet" href="css/ui-tree.css">
     <link rel="stylesheet" href="css/graph.css">
 
@@ -77,24 +76,16 @@
                       </li>
 
                       <li>
-                          <input type="file" id="importGraphJson" name="importGraphJson[]"
+                          <input type="file" id="openSceneJson" name="importGraphJson[]"
                                  style="visibility: hidden; width: 1px; height: 1px" multiple />
-                          <a href="" ng-click="importGraphJson()">Open Graph</a>
+                          <a href="" ng-click="openSceneJson()">Open Scene</a>
                       </li>
 
-                      <li>
-                          <input type="file" id="importProcedureJson" name="importProcedureJson[]"
-                                 style="visibility: hidden; width: 1px; height: 1px" multiple />
-                          <a href="" ng-click="importProcedureJson()">Open Procedure</a>
-                      </li>
 
                       <li id = "graphJson">
-                          <a ng-href="{{graphUrl}}" download="graph.json" ng-click = "exportGraphJson()"> Save Graph </a>
+                          <a ng-href="{{sceneUrl}}" download="scene.json" ng-click = "saveSceneJson()"> Save Scene </a>
                       </li>
 
-                      <li id = "procedureJson">
-                          <a ng-href="{{procedureUrl}}" download="procedure.json" ng-click = "exportProcedureJson()"> Save Procedure </a>
-                      </li>
                   </ul>
                 </span>
 
@@ -629,7 +620,7 @@
                         <tab heading="Code">
                             <div ng-if="!codeList[nodeIndex]">
                                 <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'monokai' }"
-                                     readonly="{{true}}" >// To generate code, create nodes & procedures and run!
+                                     >// To generate code, create nodes & procedures and run!
                                 </div>
                             </div>
 
