@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/ui-tree.css">
     <link rel="stylesheet" href="css/graph.css">
 
+
     <!--three.js-->
     <link id="theme" href="css/light.css" rel="stylesheet" />
     <link href="js/threejs/editor/css/types.css" rel="stylesheet">
@@ -82,7 +83,7 @@
                       </li>
 
 
-                      <li id = "graphJson">
+                      <li id = "sceneJson">
                           <a ng-href="{{sceneUrl}}" download="scene.json" ng-click = "saveSceneJson()"> Save Scene </a>
                       </li>
 
@@ -94,11 +95,11 @@
                       <a href class="dropdown-toggle">  Node |</a>
                       <ul class="dropdown-menu">
                           <li>
-                              <a> Import Node </a>
+                              <a ng-href="{{sceneUrl}}" download="node.json" ng-click = "importNode()"> Import Node </a>
                           </li>
 
                           <li>
-                              <a> Export Node </a>
+                              <a ng-href="{{sceneUrl}}" download="node.json" ng-click = "exportNode()"> Export Node </a>
                           </li>
                       </ul>
 
@@ -131,7 +132,7 @@
             <div ui-layout>
                 <div class="layout-area" ui-layout="{flow : 'column'}">
                     <!--graph area-->
-                    <div class=" graph-area">
+                    <div class="graph-area" ui-layout-container size="25%">
                         <div
                              mouse-capture
                              ng-keydown="keyDown($event)"
@@ -185,56 +186,45 @@
                     </div>
 
                 <!--3D view area  -->
-                    <div class=" view-area" >
+                    <div class=" view-area" ui-layout-container size="50%">
+                        <div ui-layout="{ flow : 'row', dividerSize:'24'}" >
                         <!--threejs editor view port-->
-                        <div id="3dviewport" >
-                        </div>
-
-                        <!--console-->
-                        <div class = "console" style="left:9px">
-                            <button class="btn btn-default btn-xs" ng-click="isCollapsed = !isCollapsed" >
-                                Console
-                            </button>
-
-                            <button class="btn btn-default btn-xs" ng-click="codeToggle = !codeToggle" >
-                                Execution Code
-                            </button>
-
-                            <div collapse="isCollapsed">
-                                <div class="well well-lg">
-                                    <p>VIDAMO Console:</p>
-                                    <div id = 'log'>
-                                    </div>
+                            <div ui-layout-container size = "100%">
+                                <div id="3dviewport" >
                                 </div>
                             </div>
-                        </div>
 
-                        <div ng-show="codeToggle">
-                            <div class="codeEditor"
-                                    ui-ace="{ mode: 'javascript', theme: 'monokai' }"
-                                    ng-model="javascriptCode"
-                                    readonly="{{true}}">
+
+
+                            <div ui-layout-container size = "0%" class="monitor">
+
+                                <div ui-layout="{ flow : 'column'}" >
+
+                                    <div ui-layout-container size="18%" class="console" style="overflow:auto" >
+                                        <div >
+                                        <p>VIDAMO Console:</p>
+                                        <div id = 'log'>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div ui-layout-container size="32%" >
+                                        <div class="codeEditor"
+                                        ui-ace="{ mode: 'javascript', theme: 'monokai' }"
+                                        ng-model="javascriptCode">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <svg width="32" height="32"
-                                 style="position: absolute;
-                                        top: 3px;
-                                        right: 20px;
-                                        cursor: pointer;">
-
-                                <path d="M 12,12 L 22,22 M 22,12 12,22"
-                                      stroke="#fff"
-                                      stroke-width = '3'
-                                      ng-click="codeToggle = !codeToggle">
-                                </path>
-                            </svg>
                         </div>
 
                     </div>
 
 
                 <!--code area-->
-                <div class="code-area" >
+                <div class="code-area" ui-layout-container size="25%">
                     <div ng-if = "currentNodeName != ''">
                         <pre class="nodeName">{{currentNodeName}}</pre>
                     </div>
@@ -271,12 +261,6 @@
                                                         </div>
                                                         </accordion-heading>
 
-
-
-
-
-
-
                                                         <div ui-tree-nodes=""
                                                              ng-model="node.nodes"
                                                              ng-class="{hidden: collapsed}">
@@ -296,6 +280,7 @@
                                                                         <option value="list">list</option>
                                                                     </select>
                                                                 </div>
+
 
                                                                 <div ng-if="node.dataType == 'var'">
                                                                     <div class="input-group input-group-sm">
@@ -620,7 +605,7 @@
                         <tab heading="Code">
                             <div ng-if="!codeList[nodeIndex]">
                                 <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'monokai' }"
-                                     >// To generate code, create nodes & procedures and run!
+                                     readonly="{{true}}">// To generate code, create nodes & procedures and run!
                                 </div>
                             </div>
 

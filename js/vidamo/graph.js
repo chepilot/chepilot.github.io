@@ -3,6 +3,7 @@
 //
 
 vidamo.controller('graphCtrl', function($scope,prompt,$http) {
+
     // initialize content for javascript Code
     $scope.javascriptCode = '//\n' + '// To generate code, create nodes & procedures and run!\n' + '//\n';
 
@@ -40,6 +41,10 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     } else {
         alert('The File APIs are not fully supported in this browser.');
     }
+
+    //
+    // ------------------------------------- Menu -------------------------------------
+    //
 
     // open and read json file for scene
 
@@ -103,6 +108,17 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         var sceneBlob = new Blob([graphJson + '\n\n' + '//procedure json\n' + procedureJson], {type: "application/json"});
 
         $scope.sceneUrl = URL.createObjectURL(sceneBlob);
+    };
+
+    // import pre-defined node
+
+    $scope.importNode = function () {
+
+    };
+
+    // export selected node
+    $scope.exportNode = function (){
+
     };
 
 
@@ -181,8 +197,8 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         var newNodeDataModel = {
             name: nodeName,
             id: nextNodeID++,
-            x: 2200,
-            y: 2000,
+            x: 1900,
+            y: 2100,
             inputConnectors: [
             ],
             outputConnectors: [
@@ -208,7 +224,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     // Add an input connector to selected nodes.
 
     $scope.addNewInputConnector = function () {
-        var connectorName = prompt("Enter a connector name:", "New connector");
+        var connectorName = prompt("Enter a connector name:", "NewInput");
 
         if (!isValidName(connectorName)) {
             return;
@@ -229,7 +245,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     // Add an output connector to selected nodes.
 
     $scope.addNewOutputConnector = function () {
-        var connectorName = prompt("Enter a connector name:", "New connector");
+        var connectorName = prompt("Enter a connector name:", "NewOutput");
 
         if (!isValidName(connectorName)) {
             return;
@@ -842,6 +858,7 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     }
 
 });
+
 
 
 
