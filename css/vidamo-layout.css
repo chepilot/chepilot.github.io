@@ -197,6 +197,10 @@ right pane code area
     overflow: auto;
 }
 
+.code-area .nodeName{
+    border:0px;
+}
+
 /* hack for ui-tree procedure tree structure*/
 .angular-ui-tree-handle {
     background: #ffffff;
@@ -263,8 +267,3 @@ right pane code area
     height: 24px !important;
     line-height: 1 !important;
 }
-
-/*.glyphicon-chevron-up:after {*/
-    /*font-size: 12px;*/
-    /*content: "Inspector" !important;*/
-/*}*/

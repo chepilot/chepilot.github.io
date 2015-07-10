@@ -407,13 +407,13 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
     $scope.applyValue = function (cate, value,location){
         switch (cate){
 
-            //
-            // ----------- cases for data procedure -----------
-            //
-
             case 'dataName':
                 location.dataName = value;;
                 break;
+
+            //
+            // ----------- cases for data procedure -----------
+            //
 
             case 'dataValue':
                 location.dataValue = value;
@@ -431,7 +431,9 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 location.method = value;
                 break;
 
-            // append output method, parameters: 1. output port, 2. dataValue 3. dataName
+            // append output method
+            // parameters[0]:  output port
+            // parameters[2]:  dataName
 
             case 'outputPort':
                 location.parameters[0] = value;
@@ -441,18 +443,44 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 location.parameters[2] = value;
                 break;
 
-            // get input method, parameters: 1. input port index
+            // get input method
+            // parameters[0]: input port index
 
             case 'inputPort':
                 location.parameters[0] = value;
-                console.log("input port name:",value);
                 break;
 
-            // print data method, parameter: 1. data value 2. data name
-
+            // print data method
             case 'printDataName':
                 location.parameters[0] = value;
                 break;
+
+
+            //list length parameter:
+            // parameter[0]: target list
+            // dataName: variable name to store list length
+
+            case 'targetList':
+                location.parameters[0] = value;
+                break;
+
+
+            //list item
+            // parameters[0]: target list
+            // parameters[1]: list index
+            // dataName: variable name to store list item
+            case 'itemIndex':
+                location.parameters[1] = value;
+                break;
+
+            //reverse list
+
+
+            //sort list
+
+
+            //insert item to list
+
 
             //
             // ----------- control procedure -----------
@@ -828,6 +856,43 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             + procedure.parameters[0]
             + ' = '
             + procedure.parameters[2] + ';\n';
+        }
+
+        // todo new methods
+        if(procedure.method == 'list length'){
+            $scope.javascriptCode += intentation + '    '  + 'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '.length;\n';
+
+            $scope.codeList[nodeIndex] += intentation + '    '  + 'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '.length;\n';
+        }
+
+        if(procedure.method == 'list item'){
+            $scope.javascriptCode += intentation + '    '  + 'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '[' + procedure.parameters[1] + '];\n';
+
+            $scope.codeList[nodeIndex] += intentation + '    '  + 'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '[' + procedure.parameters[1] + '];\n';
+        }
+
+        if(procedure.method == 'reverse list'){
+
+        }
+
+        if(procedure.method == 'sort list'){
+
+        }
+
+        if(procedure.method == 'insert item to list'){
+
         }
     }
 
