@@ -187,33 +187,34 @@
 
                 <!--3D view area  -->
                     <div class=" view-area" ui-layout-container size="50%">
-                        <div ui-layout="{ flow : 'row', dividerSize:'24'}" >
+                        <div ui-layout="{ flow : 'row', dividerSize:'10'}" >
                         <!--threejs editor view port-->
-                            <div ui-layout-container size = "100%">
+                            <div ui-layout-container size = "85%">
                                 <div id="3dviewport" >
                                 </div>
                             </div>
 
 
 
-                            <div ui-layout-container size = "0%" class="monitor">
+                            <div ui-layout-container size = "15%" class="monitor">
 
-                                <div ui-layout="{ flow : 'column'}" >
+                                <div ui-layout="{ flow : 'column', dividerSize:'9'}" >
 
-                                    <div ui-layout-container size="18%" class="console" style="overflow:auto" >
-                                        <div >
-                                        <p>VIDAMO Console:</p>
-                                        <div id = 'log'>
+                                    <div ui-layout-container size="18%"  >
+                                        <div>
+                                            <div class="info-title">VIDAMO Console:</div>
+                                            <div class="console" id = 'log'>
                                         </div>
                                         </div>
 
                                     </div>
 
                                     <div ui-layout-container size="32%" >
-                                        <div class="codeEditor"
-                                        ui-ace="{ mode: 'javascript', theme: 'monokai' }"
-                                        ng-model="javascriptCode">
-                                        </div>
+                                            <div class="info-title">Exectution Code:</div>
+                                            <div class="codeEditor"
+                                                ui-ace="{ mode: 'javascript', theme: 'monokai' }"
+                                                ng-model="javascriptCode">
+                                            </div>
                                     </div>
                                 </div>
 
