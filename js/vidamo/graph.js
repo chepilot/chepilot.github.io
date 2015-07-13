@@ -800,8 +800,8 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             if(procedure.dataType == 'var'){
                 codeBlock = intentation + "    " + "var "
                 + procedure.dataName
-                + " = '"
-                + procedure.dataValue + "';\n";
+                + " = "
+                + procedure.dataValue + ";\n";
 
                 $scope.javascriptCode += codeBlock;
                 $scope.codeList[nodeIndex] += codeBlock;
