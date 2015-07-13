@@ -5,7 +5,7 @@
 vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
     // initialize content for javascript Code
-    $scope.javascriptCode = '//\n' + '// To generate code, create nodes & procedures and run!\n' + '//\n';
+    $scope.javascriptCode = '// To generate code,\n' + '// create nodes & procedures and run!\n';
 
     // data structure of procedure list
     $scope.dataList = [];
@@ -445,18 +445,18 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
 
             // get input method
             // parameters[0]: input port index
-
             case 'inputPort':
                 location.parameters[0] = value;
                 break;
 
             // print data method
+            // parameters[0]: name of data to be printed
             case 'printDataName':
                 location.parameters[0] = value;
                 break;
 
 
-            //list length parameter:
+            // list length
             // parameter[0]: target list
             // dataName: variable name to store list length
 
@@ -465,19 +465,34 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
                 break;
 
 
-            //list item
+            // list item
             // parameters[0]: target list
-            // parameters[1]: list index
+            // parameters[1]: sorting category (alphabetic or numeric)
             // dataName: variable name to store list item
             case 'itemIndex':
                 location.parameters[1] = value;
                 break;
 
-            //reverse list
+            // sort list
+            case 'category':
+                location.parameters[1] = value;
+                break;
 
+            // reverse list
+            // parameters[0]: target list
+            // dataName: variable name to store list item
 
-            //sort list
+            // combine list
+            // parameters[0]: first list
+            // parameters[1]: second list
+            // dataName: variable name to store combined list
+            case  'targetList1':
+                location.parameters[0] = value;
+                break;
 
+            case 'targetList2':
+                location.parameters[1] = value;
+                break;
 
             //insert item to list
 
@@ -767,6 +782,10 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
         document.getElementById('log').innerHTML += "<div> Execution done</div>";
     };
 
+    //
+    // Procedure Code Generation
+    //
+
     // data procedure
     $scope.procedure_data = function(procedure,nodeIndex,fromLoop){
         if(fromLoop){
@@ -775,40 +794,41 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             var intentation = '';
         }
 
+        var codeBlock = '';
+
         if(procedure.title == "Data"){
             if(procedure.dataType == 'var'){
-                $scope.javascriptCode += intentation + "    " + "var "
+                codeBlock = intentation + "    " + "var "
                 + procedure.dataName
                 + " = '"
                 + procedure.dataValue + "';\n";
 
-                $scope.codeList[nodeIndex] += intentation +"    " + "var "
-                + procedure.dataName
-                + " = '"
-                + procedure.dataValue + "';\n";
+                $scope.javascriptCode += codeBlock;
+                $scope.codeList[nodeIndex] += codeBlock;
             }
             else if(procedure.dataType == 'list'){
                 $scope.javascriptCode += intentation + "    " + "var "
                 + procedure.dataName
                 + ' = '
-                + '[' ;
+                + '[' + procedure.dataValue + "];\n";
 
                 $scope.codeList[nodeIndex] += intentation + "    " + "var "
-                + procedure.dataName
-                + ' = '
-                + '[' ;
+                    + procedure.dataName
+                    + ' = '
+                    + '[' + procedure.dataValue + "];\n";
 
-                for(var i = 0; i < procedure.dataValue.split(',').length; i++){
-                    if(i != procedure.dataValue.split(',').length -1){
-                        $scope.javascriptCode += "'" + procedure.dataValue.split(',')[i]  + "',";
-                        $scope.codeList[nodeIndex] += "'" + procedure.dataValue.split(',')[i]  + "',";
-                    }else if(i == procedure.dataValue.split(',').length-1){
-                        $scope.javascriptCode += "'" + procedure.dataValue.split(',')[i]  + "'";
-                        $scope.codeList[nodeIndex] += "'" + procedure.dataValue.split(',')[i]  + "'";
-                    }
-                }
-                $scope.javascriptCode +=  '];\n';
-                $scope.codeList[nodeIndex] +=  '];\n';
+                //for(var i = 0; i < procedure.dataValue.split(',').length; i++){
+                //    if(i != procedure.dataValue.split(',').length -1){
+                //        $scope.javascriptCode += "'" + procedure.dataValue.split(',')[i]  + "',";
+                //        $scope.codeList[nodeIndex] += "'" + procedure.dataValue.split(',')[i]  + "',";
+                //    }else if(i == procedure.dataValue.split(',').length-1){
+                //        $scope.javascriptCode += "'" + procedure.dataValue.split(',')[i]  + "'";
+                //        $scope.codeList[nodeIndex] += "'" + procedure.dataValue.split(',')[i]  + "'";
+                //    }
+                //}
+                //
+                //$scope.javascriptCode +=  '];\n';
+                //$scope.codeList[nodeIndex] +=  '];\n';
             }
 
         }
@@ -823,76 +843,120 @@ vidamo.controller('graphCtrl', function($scope,prompt,$http) {
             var intentation = '';
         }
 
+        var codeBlock = '';
+
         // action: get data from input port
         if(procedure.method == 'get input'){
 
-            $scope.javascriptCode += intentation  + '    ' + 'var '
-            + procedure.dataName + ' = '
-            + procedure.parameters[0] + ';\n'
+            codeBlock = intentation  + '    ' + 'var '
+                + procedure.dataName + ' = '
+                + procedure.parameters[0] + ';\n';
 
-            $scope.codeList[nodeIndex] += intentation  + '    ' + 'var '
-            + procedure.dataName + ' = '
-            + procedure.parameters[0] + ';\n'
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
 
         // action: print data
         if(procedure.method == 'print data'){
-            $scope.javascriptCode +=  intentation  + '    ' + 'VIDAMO.print_data('
-            + procedure.parameters[0] + ');\n'
+            codeBlock =  intentation  + '    ' + 'VIDAMO.print_data('
+                         + procedure.parameters[0] + ');\n';
 
-            $scope.codeList[nodeIndex] += intentation + '    ' + 'VIDAMO.print_data('
-            + procedure.parameters[0] + ');\n'
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
 
         // action: append data to output port
         if(procedure.method == 'append output'){
 
-            $scope.javascriptCode += intentation + '    '
+            codeBlock = intentation + '    '
             + procedure.parameters[0]
             + ' = '
             + procedure.parameters[2] + ';\n';
 
-            $scope.codeList[nodeIndex] += intentation + '    '
-            + procedure.parameters[0]
-            + ' = '
-            + procedure.parameters[2] + ';\n';
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
 
-        // todo new methods
+        // action: create new var contains list length
         if(procedure.method == 'list length'){
-            $scope.javascriptCode += intentation + '    '  + 'var '
+            codeBlock =
+                intentation + '    '  + 'var '
                 + procedure.dataName
                 + ' = '
                 + procedure.parameters[0] + '.length;\n';
 
-            $scope.codeList[nodeIndex] += intentation + '    '  + 'var '
-                + procedure.dataName
-                + ' = '
-                + procedure.parameters[0] + '.length;\n';
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
 
+        // action: create new var contains list item
         if(procedure.method == 'list item'){
-            $scope.javascriptCode += intentation + '    '  + 'var '
+            codeBlock =
+                intentation + '    '  + 'var '
                 + procedure.dataName
                 + ' = '
                 + procedure.parameters[0] + '[' + procedure.parameters[1] + '];\n';
 
-            $scope.codeList[nodeIndex] += intentation + '    '  + 'var '
-                + procedure.dataName
-                + ' = '
-                + procedure.parameters[0] + '[' + procedure.parameters[1] + '];\n';
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
 
-        if(procedure.method == 'reverse list'){
-
-        }
-
+        // action: create new var contains sorted list and keep original list unchanged
         if(procedure.method == 'sort list'){
 
+            if(procedure.parameters[1] == 'alphabetic'){
+                codeBlock =
+                    intentation + '    '  + 'var '
+                    + procedure.dataName
+                    + ' = '
+                    + procedure.parameters[0] + '.slice().sort();\n';
+
+                $scope.javascriptCode += codeBlock;
+                $scope.codeList[nodeIndex] += codeBlock;
+            }
+
+            if(procedure.parameters[1] == 'numeric'){
+                codeBlock =
+                    intentation + '    '  + 'var '
+                    + procedure.dataName
+                    + ' = '
+                    + procedure.parameters[0] + '.slice().sort(function(a,b){return a-b});\n';
+
+                $scope.javascriptCode += codeBlock;
+                $scope.codeList[nodeIndex] += codeBlock;
+            }
         }
 
-        if(procedure.method == 'insert item to list'){
+        // action: create new var contains reversed list and keep original list unchanged
+        if(procedure.method == 'reverse list'){
+            codeBlock =
+                intentation + '    '  + 'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '.slice().reverse();\n';
 
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
+        }
+
+        // action: create new var contains combined list of two lists
+        // todo multiple lists support
+        if(procedure.method == 'combine lists'){
+            codeBlock =
+                intentation + '    ' +  'var '
+                + procedure.dataName
+                + ' = '
+                + procedure.parameters[0] + '.concat(' + procedure.parameters[1] + ');\n';
+
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
+        }
+
+        // action: create new var contains list with added items and keep original list unchanged
+        if(procedure.method == 'insert items to list'){
+
+            $scope.javascriptCode += codeBlock;
+            $scope.codeList[nodeIndex] += codeBlock;
         }
     }
 

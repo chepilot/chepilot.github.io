@@ -17,7 +17,6 @@ a{
 @media (min-width: 768px) {
     .nav-tabs.nav-justified > li > a{
         padding: 3px;
-        border-top: 0px solid black !important;
     }
 }
 
@@ -79,7 +78,7 @@ a{
 .graph-area .buttons{
     position: absolute;
     bottom: 10px;
-    padding-left: 5px;
+    padding-left: 4px;
 }
 
 /**************************
@@ -109,11 +108,6 @@ a{
 .view-area  .monitor .stretch{
     top: 0px;
 }
-
-/*.view-area .ui-layout-row .ui-splitbar .glyphicon-chevron-down :after{*/
-    /*font-size: 12px;*/
-    /*content: "Inspector     " !important;*/
-/*}*/
 
 
 .view-area .monitor .ui-layout-column .ui-splitbar{
@@ -178,7 +172,7 @@ right pane code area
 
 .code-area .buttons{
     position: fixed;
-    bottom: 17px;
+    bottom: 15px;
     margin-left: 5px;
 }
 

@@ -156,26 +156,26 @@
                                         ng-click="addNewNode()"
                                         title="Add a new node to the chart">
                                     Add Node
-                                </button> &nbsp;&nbsp;
+                                </button> &nbsp;
                                 <button class="btn btn-default btn-xs"
                                         ng-click="addNewInputConnector()"
                                         ng-disabled="chartViewModel.getSelectedNodes().length == 0"
                                         title="Add a new input connector to the selected node">
                                     Add Input
-                                </button> &nbsp;&nbsp;
+                                </button> &nbsp;
                                 <button class="btn btn-default btn-xs"
                                         ng-click="addNewOutputConnector()"
                                         ng-disabled="chartViewModel.getSelectedNodes().length == 0"
                                         title="Add a new output connector to the selected node">
                                     Add Output
-                                </button> &nbsp;&nbsp;
+                                </button> &nbsp;
                                 <button class="btn btn-default btn-xs"
                                         ng-click="deleteSelected()"
                                         ng-disabled="chartViewModel.getSelectedNodes().length
                                             == 0 && chartViewModel.getSelectedConnections().length == 0"
                                         title="Delete selected nodes and connections">
                                     Delete
-                                </button> &nbsp;&nbsp;
+                                </button> &nbsp;
                                 <button class="btn btn-default btn-xs"
                                         ng-click="run()"
                                         title="Run program">
@@ -200,7 +200,7 @@
 
                                 <div ui-layout="{ flow : 'column', dividerSize:'9'}" >
 
-                                    <div ui-layout-container size="18%"  >
+                                    <div ui-layout-container size="25%"  >
                                         <div>
                                             <div class="info-title">VIDAMO Console:</div>
                                             <div class="console" id = 'log'>
@@ -209,7 +209,7 @@
 
                                     </div>
 
-                                    <div ui-layout-container size="32%" >
+                                    <div ui-layout-container size="25%" >
                                             <div class="info-title">Exectution Code:</div>
                                             <div class="codeEditor"
                                                 ui-ace="{ mode: 'javascript', theme: 'monokai' }"
@@ -342,7 +342,7 @@
                                                                             {{node.controlType}}
                                                                         </option>
                                                                         <option value="for item in list">For item in list</option>
-                                                                        <option value="while condition">while condition</option>
+                                                                        <!--<option value="while condition">while condition</option>-->
                                                                     </select>
                                                                 </div>
 
@@ -388,6 +388,7 @@
                                                                             <option value="" selected >
                                                                                 {{node.method}}
                                                                             </option>
+
                                                                             <!--basic-->
                                                                             <option value="" disabled> -- basic </option>
                                                                             <option value="get input">get input </option>
@@ -399,9 +400,11 @@
                                                                             <option value=""  disabled> -- list manipulation </option>
                                                                             <option value="list length">list length</option>
                                                                             <option value="list item">list item</option>
-                                                                            <option value="reverse list">todo/ reverse list</option>
-                                                                            <option value="sort list">todo/sort list</option>
-                                                                            <option value="insert item to list">todo/ insert item to list</option>
+                                                                            <option value="sort list">sort list</option>
+                                                                            <option value="reverse list">reverse list</option>
+                                                                            <option value="combine lists">combine lists</option>
+                                                                            <!--<option value="insert item to list">todo/ insert item to list</option>-->
+
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -487,6 +490,215 @@
                                                                                    "applyValue('dataName',this.dataName,node)">
                                                                 </div>
                                                             </div>
+
+                                                            <!--method for sort list-->
+                                                            <div ng-if="node.method == 'sort list'">
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <select ng-model="targetList"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('targetList', this.targetList,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[0]}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
+                                                                                value="{{node.dataName}}">
+                                                                            {{node.dataName}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
+                                                                                value="{{node.forItemName}}">
+                                                                            {{node.forItemName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> category: </span>
+                                                                    <select ng-model="category"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('category', this.category,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[1]}}
+                                                                        </option>
+                                                                        <option value="alphabetic">
+                                                                            alphabetic
+                                                                        </option>
+                                                                        <option value="numeric">
+                                                                            numeric
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon">sorted list name:</span>
+                                                                    <input class="form-control"
+                                                                           name="dataName"
+                                                                           placeholder="{{node.dataName}}"
+                                                                           ng-model="dataName"
+                                                                           ng-change=
+                                                                                   "applyValue('dataName',this.dataName,node)">
+                                                                </div>
+                                                            </div>
+
+                                                            <!--method for reverse list-->
+                                                            <div ng-if="node.method == 'reverse list'">
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <select ng-model="targetList"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('targetList', this.targetList,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[0]}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
+                                                                                value="{{node.dataName}}">
+                                                                            {{node.dataName}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
+                                                                                value="{{node.forItemName}}">
+                                                                            {{node.forItemName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon">reversed list name:</span>
+                                                                    <input class="form-control"
+                                                                           name="dataName"
+                                                                           placeholder="{{node.dataName}}"
+                                                                           ng-model="dataName"
+                                                                           ng-change=
+                                                                                   "applyValue('dataName',this.dataName,node)">
+                                                                </div>
+                                                            </div>
+
+                                                            <!--method for concatenate two lists-->
+                                                            <div ng-if="node.method == 'combine lists'">
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> list1: </span>
+                                                                    <select ng-model="targetList1"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('targetList1', this.targetList1,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[0]}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
+                                                                                value="{{node.dataName}}">
+                                                                            {{node.dataName}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
+                                                                                value="{{node.forItemName}}">
+                                                                            {{node.forItemName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> list2: </span>
+                                                                    <select ng-model="targetList2"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('targetList2', this.targetList2,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[0]}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
+                                                                                value="{{node.dataName}}">
+                                                                            {{node.dataName}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
+                                                                                value="{{node.forItemName}}">
+                                                                            {{node.forItemName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon">resulted list name:</span>
+                                                                    <input class="form-control"
+                                                                           name="dataName"
+                                                                           placeholder="{{node.dataName}}"
+                                                                           ng-model="dataName"
+                                                                           ng-change=
+                                                                                   "applyValue('dataName',this.dataName,node)">
+                                                                </div>
+                                                            </div>
+
+                                                            <!--method for insert items-->
+                                                            <div ng-if="node.method == 'insert items to list'">
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <select ng-model="targetList"
+                                                                            class="form-control"
+                                                                            ng-change =
+                                                                                    "applyValue('targetList', this.targetList,node)">
+                                                                        <option value=""
+                                                                                selected="selected">
+                                                                            {{node.parameters[0]}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.dataName"
+                                                                                value="{{node.dataName}}">
+                                                                            {{node.dataName}}
+                                                                        </option>
+                                                                        <option ng-repeat="node in flattenData"
+                                                                                ng-if="node.forItemName"
+                                                                                value="{{node.forItemName}}">
+                                                                            {{node.forItemName}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon">location:</span>
+                                                                    <input class="form-control"
+                                                                           name="location"
+                                                                           placeholder="{{node.parameters[1]}}"
+                                                                           ng-model="location"
+                                                                           ng-change=
+                                                                                   "applyValue('location',this.location,node)">
+                                                                </div>
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon" >items</span>
+                                                                    <input class="form-control"
+                                                                           name="insertItems"
+                                                                           placeholder="{{node.dataValue}}"
+                                                                           ng-model="dataValue"
+                                                                           ng-change=
+                                                                                   "applyValue('dataValue',this.dataValue,node)">
+                                                                </div>
+
+
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon">sorted list name:</span>
+                                                                    <input class="form-control"
+                                                                           name="dataName"
+                                                                           placeholder="{{node.dataName}}"
+                                                                           ng-model="dataName"
+                                                                           ng-change=
+                                                                                   "applyValue('dataName',this.dataName,node)">
+                                                                </div>
+                                                            </div>
+
 
                                                             <!--method for append data to output port-->
                                                             <div ng-if="node.method == 'append output'">
@@ -603,11 +815,11 @@
                                 <div class = "buttons">
                                     <br>
                                     <button class="btn btn-default btn-xs" ng-click="newItem('Data')">Add Data</button>
-                                    &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;
                                     <button class="btn btn-default btn-xs" ng-click="newItem('Action')">Add Action</button>
-                                    &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;
                                     <button class="btn btn-default btn-xs" ng-click="newItem('Control')">Add Control</button>
-                                    &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;
                                 </div>
                         </tab>
 
@@ -699,7 +911,8 @@
                         <tab heading="Code">
                             <div ng-if="!codeList[nodeIndex]">
                                 <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'monokai' }"
-                                     readonly="{{true}}">// To generate code, create nodes & procedures and run!
+                                     readonly="{{true}}">// To generate code,
+// create nodes & procedures and run!
                                 </div>
                             </div>
 
