@@ -202,7 +202,7 @@
 
                                     <div ui-layout-container size="25%"  >
                                         <div>
-                                            <div class="info-title">VIDAMO Console:</div>
+                                            <div class="info-title">Console:</div>
                                             <div class="console" id = 'log'>
                                         </div>
                                         </div>
@@ -212,7 +212,7 @@
                                     <div ui-layout-container size="25%" >
                                             <div class="info-title">Exectution Code:</div>
                                             <div class="codeEditor"
-                                                ui-ace="{ mode: 'javascript', theme: 'monokai' }"
+                                                ui-ace="{ mode: 'javascript', theme: 'tomorrow' }"
                                                 ng-model="javascriptCode">
                                             </div>
                                     </div>
@@ -285,7 +285,7 @@
 
                                                                 <div ng-if="node.dataType == 'var'">
                                                                     <div class="input-group input-group-sm">
-                                                                        <span class="input-group-addon">var name</span>
+                                                                        <span class="input-group-addon">Var name</span>
                                                                         <input  type="text"
                                                                                 class="form-control"
                                                                                name="dataName"
@@ -296,7 +296,7 @@
                                                                     </div>
 
                                                                     <div class="input-group input-group-sm">
-                                                                        <span class="input-group-addon" >var value</span>
+                                                                        <span class="input-group-addon" >Var value</span>
                                                                         <input class="form-control"
                                                                                name="dataValue"
                                                                                placeholder="{{node.dataValue}}"
@@ -308,7 +308,7 @@
 
                                                                 <div ng-if="node.dataType == 'list'">
                                                                     <div class="input-group input-group-sm">
-                                                                        <span class="input-group-addon">list name</span>
+                                                                        <span class="input-group-addon">List name</span>
                                                                         <input class="form-control"
                                                                                name="dataName"
                                                                                placeholder="{{node.dataName}}"
@@ -318,7 +318,7 @@
                                                                     </div>
 
                                                                     <div class="input-group input-group-sm">
-                                                                        <span class="input-group-addon" >list value</span>
+                                                                        <span class="input-group-addon" >List value</span>
                                                                         <input class="form-control"
                                                                                name="dataValue"
                                                                                placeholder="{{node.dataValue}}"
@@ -380,7 +380,7 @@
                                                             <!--dropdown menu for Action-->
                                                             <div ng-if="node.title == 'Action'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> method: </span>
+                                                                    <span class="input-group-addon"> Method: </span>
                                                                         <select ng-model="method"
                                                                            name ="method"
                                                                            class="form-control"
@@ -391,18 +391,18 @@
 
                                                                             <!--basic-->
                                                                             <option value="" disabled> -- basic </option>
-                                                                            <option value="get input">get input </option>
-                                                                            <option value="append output">append output</option>
-                                                                            <option value="print data">print data</option>
+                                                                            <option value="get input">Get input </option>
+                                                                            <option value="append output">Append output</option>
+                                                                            <option value="print data">Print data</option>
 
 
                                                                             <!--list manipulation-->
-                                                                            <option value=""  disabled> -- list manipulation </option>
-                                                                            <option value="list length">list length</option>
-                                                                            <option value="list item">list item</option>
-                                                                            <option value="sort list">sort list</option>
-                                                                            <option value="reverse list">reverse list</option>
-                                                                            <option value="combine lists">combine lists</option>
+                                                                            <option value=""  disabled> -- List manipulation </option>
+                                                                            <option value="list length">List length</option>
+                                                                            <option value="list item">List item</option>
+                                                                            <option value="sort list">Sort list</option>
+                                                                            <option value="reverse list">Reverse list</option>
+                                                                            <option value="combine lists">Combine lists</option>
                                                                             <!--<option value="insert item to list">todo/ insert item to list</option>-->
 
                                                                     </select>
@@ -412,7 +412,7 @@
                                                             <!--method for list length-->
                                                             <div ng-if="node.method == 'list length'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <span class="input-group-addon"> List: </span>
                                                                     <select ng-model="targetList"
                                                                             class="form-control"
                                                                             ng-change =
@@ -435,7 +435,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">length var name:</span>
+                                                                    <span class="input-group-addon">Length var name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -448,7 +448,7 @@
                                                             <!--method for list item-->
                                                             <div ng-if="node.method == 'list item'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <span class="input-group-addon"> List: </span>
                                                                     <select ng-model="targetList"
                                                                             class="form-control"
                                                                             ng-change =
@@ -471,7 +471,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">item index:</span>
+                                                                    <span class="input-group-addon">Item index:</span>
                                                                     <input class="form-control"
                                                                            name="itemIndex"
                                                                            placeholder="{{node.itemIndex}}"
@@ -481,7 +481,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">item var name:</span>
+                                                                    <span class="input-group-addon">Item var name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -494,7 +494,7 @@
                                                             <!--method for sort list-->
                                                             <div ng-if="node.method == 'sort list'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <span class="input-group-addon"> List: </span>
                                                                     <select ng-model="targetList"
                                                                             class="form-control"
                                                                             ng-change =
@@ -517,7 +517,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> category: </span>
+                                                                    <span class="input-group-addon"> Category: </span>
                                                                     <select ng-model="category"
                                                                             class="form-control"
                                                                             ng-change =
@@ -537,7 +537,7 @@
 
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">sorted list name:</span>
+                                                                    <span class="input-group-addon">Sorted list name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -550,7 +550,7 @@
                                                             <!--method for reverse list-->
                                                             <div ng-if="node.method == 'reverse list'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <span class="input-group-addon"> List: </span>
                                                                     <select ng-model="targetList"
                                                                             class="form-control"
                                                                             ng-change =
@@ -573,7 +573,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">reversed list name:</span>
+                                                                    <span class="input-group-addon">Reversed list name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -586,7 +586,7 @@
                                                             <!--method for concatenate two lists-->
                                                             <div ng-if="node.method == 'combine lists'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list1: </span>
+                                                                    <span class="input-group-addon"> List1: </span>
                                                                     <select ng-model="targetList1"
                                                                             class="form-control"
                                                                             ng-change =
@@ -609,7 +609,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list2: </span>
+                                                                    <span class="input-group-addon"> List2: </span>
                                                                     <select ng-model="targetList2"
                                                                             class="form-control"
                                                                             ng-change =
@@ -632,7 +632,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">resulted list name:</span>
+                                                                    <span class="input-group-addon">Resulted list name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -645,7 +645,7 @@
                                                             <!--method for insert items-->
                                                             <div ng-if="node.method == 'insert items to list'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> list: </span>
+                                                                    <span class="input-group-addon"> List: </span>
                                                                     <select ng-model="targetList"
                                                                             class="form-control"
                                                                             ng-change =
@@ -668,7 +668,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">location:</span>
+                                                                    <span class="input-group-addon">Location:</span>
                                                                     <input class="form-control"
                                                                            name="location"
                                                                            placeholder="{{node.parameters[1]}}"
@@ -678,7 +678,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon" >items</span>
+                                                                    <span class="input-group-addon" >Items</span>
                                                                     <input class="form-control"
                                                                            name="insertItems"
                                                                            placeholder="{{node.dataValue}}"
@@ -689,7 +689,7 @@
 
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">sorted list name:</span>
+                                                                    <span class="input-group-addon">Sorted list name:</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -703,7 +703,7 @@
                                                             <!--method for append data to output port-->
                                                             <div ng-if="node.method == 'append output'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> output port: </span>
+                                                                    <span class="input-group-addon"> Output port: </span>
                                                                     <select ng-model="outputPort"
                                                                             class="form-control"
                                                                             ng-change =
@@ -720,7 +720,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="input-group input-group-sm">
-                                                                <span class="input-group-addon"> data name: </span>
+                                                                <span class="input-group-addon"> Data name: </span>
                                                                     <select ng-model="outputDataName"
                                                                             class="form-control"
                                                                             ng-change =
@@ -741,7 +741,7 @@
                                                             <!--method for get data from input port-->
                                                             <div ng-if="node.method == 'get input'">
                                                                 <div class="input-group input-group-sm">
-                                                                <span class="input-group-addon"> input port: </span>
+                                                                <span class="input-group-addon"> Input port: </span>
                                                                     <select ng-model="inputPort"
                                                                             class="form-control"
                                                                             ng-change =
@@ -758,7 +758,7 @@
                                                                 </div>
 
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon">data name</span>
+                                                                    <span class="input-group-addon">Data name</span>
                                                                     <input class="form-control"
                                                                            name="dataName"
                                                                            placeholder="{{node.dataName}}"
@@ -771,7 +771,7 @@
                                                             <!--method for print data-->
                                                             <div ng-if="node.method == 'print data'">
                                                                 <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"> data name: </span>
+                                                                    <span class="input-group-addon"> Data name: </span>
                                                                     <select ng-model="printDataName"
                                                                             class="form-control"
                                                                             ng-change =
@@ -910,14 +910,13 @@
                         <!--ace text editor-->
                         <tab heading="Code">
                             <div ng-if="!codeList[nodeIndex]">
-                                <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'monokai' }"
+                                <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'tomorrow' }"
                                      readonly="{{true}}">// To generate code,
-// create nodes & procedures and run!
-                                </div>
+// create nodes & procedures and run!</div>
                             </div>
 
                             <div ng-if="codeList[nodeIndex]">
-                                <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'monokai' }"
+                                <div class="codeEditor" ui-ace="{ mode: 'javascript', theme: 'tomorrow' }"
                                      ng-model="codeList[nodeIndex]"
                                      readonly="{{true}}">
                                 </div>
